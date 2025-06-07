@@ -1,0 +1,7 @@
+# HTTP 到 HTTPS 重定向
+http://feedback.styleme.ai/* https://feedback.styleme.ai/:splat 301!
+http://www.feedback.styleme.ai/* https://feedback.styleme.ai/:splat 301!
+https://www.feedback.styleme.ai/* https://feedback.styleme.ai/:splat 301!
+
+# 处理 404 - 所有未匹配的路由重定向到首页
+/* / 200
