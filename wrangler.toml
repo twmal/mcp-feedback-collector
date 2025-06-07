@@ -1,0 +1,49 @@
+name = "mcp-feedback-collector"
+type = "webpack"
+account_id = "" # 需要填入您的 Cloudflare 账户 ID
+
+[site]
+single_page_app = false
+
+[build]
+command = "npm run build"
+destination = ".next"
+
+[build.upload]
+format = "directory"
+
+[env.production]
+name = "mcp-feedback-production"
+route = "feedback.styleme.ai/*"
+
+[env.staging]
+name = "mcp-feedback-staging"
+route = "feedback-staging.styleme.ai/*"
+
+# 缓存配置
+[cache_settings]
+# 静态资源缓存 1 年
+[cache_settings.static]
+pattern = "/_next/static/*"
+cache_control = "public, max-age=31536000, immutable"
+
+# 数据缓存 1 小时，边缘缓存 1 天
+[cache_settings.data]
+pattern = "/_next/data/*"
+cache_control = "public, max-age=3600, s-maxage=86400"
+
+# 图片缓存 1 周
+[cache_settings.images]
+pattern = "/_next/image*"
+cache_control = "public, max-age=604800"
+
+# 安全头部配置
+[headers]
+  [headers.security]
+    for = "/*"
+    [headers.security.values]
+      X-Frame-Options = "DENY"
+      X-Content-Type-Options = "nosniff"
+      Referrer-Policy = "strict-origin-when-cross-origin"
+      Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+      Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://res.cloudinary.com; font-src 'self' data:; connect-src 'self' https://res.cloudinary.com;"
