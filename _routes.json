@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/build/*",
+    "/public/*"
+  ],
+  "routes": [
+    {
+      "src": "^/(?:_next/static|_next/image|favicon\.ico|robots\.txt|sitemap\.xml|manifest\.json)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/_next/data/.*",
+      "headers": {
+        "cache-control": "public, max-age=3600, s-maxage=86400"
+      },
+      "continue": true
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
